@@ -19,9 +19,6 @@ import { Route as AuthenticatedImport } from './routes/_authenticated'
 import { Route as IndexImport } from './routes/index'
 import { Route as PokemonIndexImport } from './routes/pokemon/index'
 import { Route as PokemonIdImport } from './routes/pokemon/$id'
-import { Route as AuthenticatedSettingsImport } from './routes/_authenticated/settings'
-import { Route as AuthenticatedDashboardImport } from './routes/_authenticated/dashboard'
-import { Route as hiddenFolderFirstLevelImport } from './routes/(hidden-folder)/first-level'
 
 // Create/Update Routes
 
@@ -62,21 +59,6 @@ const PokemonIndexRoute = PokemonIndexImport.update({
 
 const PokemonIdRoute = PokemonIdImport.update({
   path: '/pokemon/$id',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const AuthenticatedSettingsRoute = AuthenticatedSettingsImport.update({
-  path: '/settings',
-  getParentRoute: () => AuthenticatedRoute,
-} as any)
-
-const AuthenticatedDashboardRoute = AuthenticatedDashboardImport.update({
-  path: '/dashboard',
-  getParentRoute: () => AuthenticatedRoute,
-} as any)
-
-const hiddenFolderFirstLevelRoute = hiddenFolderFirstLevelImport.update({
-  path: '/first-level',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -126,27 +108,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SecureElementImport
       parentRoute: typeof rootRoute
     }
-    '/(hidden-folder)/first-level': {
-      id: '/first-level'
-      path: '/first-level'
-      fullPath: '/first-level'
-      preLoaderRoute: typeof hiddenFolderFirstLevelImport
-      parentRoute: typeof rootRoute
-    }
-    '/_authenticated/dashboard': {
-      id: '/_authenticated/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof AuthenticatedDashboardImport
-      parentRoute: typeof AuthenticatedImport
-    }
-    '/_authenticated/settings': {
-      id: '/_authenticated/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof AuthenticatedSettingsImport
-      parentRoute: typeof AuthenticatedImport
-    }
     '/pokemon/$id': {
       id: '/pokemon/$id'
       path: '/pokemon/$id'
@@ -168,15 +129,10 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   IndexRoute,
-  AuthenticatedRoute: AuthenticatedRoute.addChildren({
-    AuthenticatedDashboardRoute,
-    AuthenticatedSettingsRoute,
-  }),
   LoginRoute,
   ProfileRoute,
   SearchRoute,
   SecureElementRoute,
-  hiddenFolderFirstLevelRoute,
   PokemonIdRoute,
   PokemonIndexRoute,
 })
@@ -195,7 +151,6 @@ export const routeTree = rootRoute.addChildren({
         "/profile",
         "/search",
         "/secureElement",
-        "/first-level",
         "/pokemon/$id",
         "/pokemon/"
       ]
@@ -204,11 +159,7 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "index.jsx"
     },
     "/_authenticated": {
-      "filePath": "_authenticated.jsx",
-      "children": [
-        "/_authenticated/dashboard",
-        "/_authenticated/settings"
-      ]
+      "filePath": "_authenticated.jsx"
     },
     "/login": {
       "filePath": "login.jsx"
@@ -221,17 +172,6 @@ export const routeTree = rootRoute.addChildren({
     },
     "/secureElement": {
       "filePath": "secureElement.jsx"
-    },
-    "/first-level": {
-      "filePath": "(hidden-folder)/first-level.jsx"
-    },
-    "/_authenticated/dashboard": {
-      "filePath": "_authenticated/dashboard.jsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/settings": {
-      "filePath": "_authenticated/settings.jsx",
-      "parent": "/_authenticated"
     },
     "/pokemon/$id": {
       "filePath": "pokemon/$id.jsx"
