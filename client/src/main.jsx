@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client'
 import { createRouter, RouterProvider } from '@tanstack/react-router';
 import { useAuth } from "./hooks/useAuth";
 import { routeTree } from './routeTree.gen.ts';
-import 'antd/dist/antd.less';
 import './styles/index.less';
+import ConfigWrapper from './ConfigWrapper.jsx';
 
 const router = createRouter({
   routeTree,
@@ -19,7 +19,11 @@ const router = createRouter({
 
 function Main() {
   const authentication = useAuth();
-  return <RouterProvider router={router} context={{ authentication }} />;
+  return (
+    <ConfigWrapper>
+      <RouterProvider router={router} context={{ authentication }} />;
+    </ConfigWrapper>
+  );
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(
