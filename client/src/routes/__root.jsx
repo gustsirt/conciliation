@@ -5,7 +5,7 @@ import { TanStackRouterDevtools } from '@tanstack/router-devtools'
   export const Route = createRootRouteWithContext()({
   component: () => (
     <>
-      <div className="p-2 flex gap-2">
+      <div>
         <Link to="/"> Home </Link> 
         <Link to="/profile">{({isActive})=> <>Profile {isActive && "*"} </>}</Link>
         {/* <Link to="/pokemon/$id" params={{ id: 6 }}> Charizard</Link> */}
