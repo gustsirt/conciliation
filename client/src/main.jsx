@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client'
 import { createRouter, RouterProvider } from '@tanstack/react-router';
 import { useAuth } from "./hooks/useAuth";
 import { routeTree } from './routeTree.gen.ts';
-import './styles/index.less';
 import ConfigWrapper from './ConfigWrapper.jsx';
+import './index.less';
 
 const router = createRouter({
   routeTree,
